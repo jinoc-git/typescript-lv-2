@@ -1,5 +1,4 @@
-import React from 'react'
-import * as S from './style'
+import * as S from './style';
 
 const Header = () => {
   return (
@@ -7,7 +6,7 @@ const Header = () => {
       <S.Title>My Todo List</S.Title>
       <S.SubTitle>React</S.SubTitle>
     </S.HeaderLayout>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
