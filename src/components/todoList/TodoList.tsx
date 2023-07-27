@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './style';
-import { Todo } from '../main/Main';
 import TodoItem from '../todoItem/TodoItem';
+import Todo from '../../interfaces/Todo';
 
 interface TodoListProps {
   todos: Todo[];

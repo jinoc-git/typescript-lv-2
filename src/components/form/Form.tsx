@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import * as S from './style';
 import Input from '../common/input/Input';
 import Button from '../common/button/Button';
-import { Todo } from '../main/Main';
 import shortid from 'shortid';
+import Todo from '../../interfaces/Todo';
 
 interface FormProps {
   todos: Todo[];

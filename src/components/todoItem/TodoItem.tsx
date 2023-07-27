@@ -1,6 +1,5 @@
-import React from 'react';
 import * as S from './style';
-import { Todo } from '../main/Main';
+import Todo from '../../interfaces/Todo';
 import Button from '../common/button/Button';
 
 interface TodoItemProps {
