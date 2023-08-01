@@ -2,16 +2,16 @@ import { ReactNode } from 'react';
 import * as S from './style';
 
 interface ButtonProps {
-  children: ReactNode; // 이걸로 받으면 다른 태그가 들어와도 받을 수 있다.
+  children: ReactNode;
   disabled?: boolean;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   $bc?: string;
+  type: 'button' | 'submit' | 'reset';
 }
 
-// $bc의 기본값을 지정하면 style.js에서 | undefined를 작성하지 않아도 된다. ($bc = '#ff5817')
-const Button = ({ children, disabled, onClick, $bc }: ButtonProps) => {
+const Button = ({ children, disabled, onClick, $bc, type }: ButtonProps) => {
   return (
-    <S.Button disabled={disabled} onClick={onClick} $bc={$bc}>
+    <S.Button disabled={disabled} onClick={onClick} $bc={$bc} type={type}>
       {children}
     </S.Button>
   );

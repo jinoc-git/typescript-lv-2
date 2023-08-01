@@ -5,7 +5,7 @@ import Button from '../common/button/Button';
 import shortid from 'shortid';
 import Todo from '../../interfaces/Todo';
 import { useDispatch } from 'react-redux';
-import { addTodo } from '../../redux/modules/todos';
+// import { addTodo } from '../../redux/modules/todosSlice';
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const Form = () => {
       content,
       isDone: false,
     };
-    dispatch(addTodo(newTodo));
+    // dispatch(addTodo(newTodo));
     clearInput();
   };
 
@@ -52,7 +52,9 @@ const Form = () => {
           />
         </S.InputTitle>
       </S.InputBox>
-      <Button disabled={disabled}>추가하기</Button>
+      <Button disabled={disabled} type={'submit'}>
+        추가하기
+      </Button>
     </S.FormLayout>
   );
 };
