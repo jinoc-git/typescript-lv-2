@@ -10,6 +10,7 @@ export const TodoItemLayout = styled.div`
   height: 200px;
   border: 2px solid;
   border-radius: 12px;
+  cursor: pointer;
 `;
 
 export const TodoItemTitle = styled.h3`

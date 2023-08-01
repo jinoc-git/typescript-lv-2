@@ -52,7 +52,9 @@ const Form = () => {
           />
         </S.InputTitle>
       </S.InputBox>
-      <Button disabled={disabled}>추가하기</Button>
+      <Button disabled={disabled} type={'submit'}>
+        추가하기
+      </Button>
     </S.FormLayout>
   );
 };

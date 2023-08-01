@@ -1,9 +1,8 @@
-import React from 'react'
+import React from 'react';
+import DetailMain from '../components/detailMain/DetailMain';
 
 const Detail = () => {
-  return (
-    <div>Detail</div>
-  )
-}
+  return <DetailMain />;
+};
 
-export default Detail
+export default Detail;
