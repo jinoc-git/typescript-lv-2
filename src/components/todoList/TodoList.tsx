@@ -1,16 +1,14 @@
 import React from 'react';
 import * as S from './style';
 import TodoItem from '../todoItem/TodoItem';
-import Todo from '../../interfaces/Todo';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/config/configStore';
+import { useAppSelector } from '../../redux/config/configStore';
 
 interface TodoListProps {
   isDone: boolean;
 }
 
 const TodoList = ({ isDone }: TodoListProps) => {
-  const todos: Todo[] = useSelector((state: RootState) => state.todos);
+  const { todos } = useAppSelector((state) => state.todos);
 
   return (
     <S.TodoListLayout>
@@ -19,12 +17,7 @@ const TodoList = ({ isDone }: TodoListProps) => {
         {todos
           .filter((todo) => todo.isDone === isDone)
           .map((todo) => {
-            return (
-              <TodoItem
-                key={todo.id}
-                item={todo}
-              />
-            );
+            return <TodoItem key={todo.id} item={todo} />;
           })}
       </S.TodoListBox>
     </S.TodoListLayout>

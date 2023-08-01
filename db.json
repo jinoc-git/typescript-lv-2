@@ -1,0 +1,10 @@
+{
+  "todos": [
+    {
+      "id": "VI-giz3rV",
+      "title": "타입스크립트2",
+      "content": "json-server 이용하기",
+      "isDone": false
+    }
+  ]
+}

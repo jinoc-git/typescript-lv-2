@@ -1,13 +1,12 @@
 import * as S from './style';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/config/configStore';
+import { useAppSelector } from '../../redux/config/configStore';
 import Button from '../common/button/Button';
 
 const DetailMain = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const todos = useSelector((state: RootState) => state.todos);
+  const { todos } = useAppSelector((state) => state.todos);
   const todo = todos.find((item) => item.id === id);
 
   const goToHome = () => {

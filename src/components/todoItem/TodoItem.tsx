@@ -1,28 +1,28 @@
 import * as S from './style';
 import Todo from '../../interfaces/Todo';
 import Button from '../common/button/Button';
-import { useDispatch } from 'react-redux';
-import { deleteTodo, switchTodo } from '../../redux/modules/todos';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../redux/config/configStore';
+import { __switchTodo, __deleteTodo } from '../../redux/modules/todosSlice';
 
 interface TodoItemProps {
   item: Todo;
 }
 
 const TodoItem = ({ item }: TodoItemProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const onClickSwitchStatus = (
     e: React.MouseEvent<HTMLButtonElement>
   ): void => {
     e.stopPropagation();
-    dispatch(switchTodo(item.id));
+    dispatch(__switchTodo(item));
   };
 
   const onClickDeleteTodo = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();
-    dispatch(deleteTodo(item.id));
+    dispatch(__deleteTodo(item.id));
   };
 
   const goToDetail = () => {
