@@ -4,13 +4,11 @@ import Input from '../common/input/Input';
 import Button from '../common/button/Button';
 import shortid from 'shortid';
 import Todo from '../../interfaces/Todo';
+import { useDispatch } from 'react-redux';
+import { addTodo } from '../../redux/modules/todos';
 
-interface FormProps {
-  todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-}
-
-const Form = ({ todos, setTodos }: FormProps) => {
+const Form = () => {
+  const dispatch = useDispatch();
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const disabled: boolean = title.length < 3 || content.length < 3;
@@ -28,7 +26,7 @@ const Form = ({ todos, setTodos }: FormProps) => {
       content,
       isDone: false,
     };
-    setTodos((): Todo[] => [...todos, newTodo]);
+    dispatch(addTodo(newTodo));
     clearInput();
   };
 
@@ -54,7 +52,9 @@ const Form = ({ todos, setTodos }: FormProps) => {
           />
         </S.InputTitle>
       </S.InputBox>
-      <Button disabled={disabled}>추가하기</Button>
+      <Button disabled={disabled} type={'submit'}>
+        추가하기
+      </Button>
     </S.FormLayout>
   );
 };
