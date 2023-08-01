@@ -1,4 +1,3 @@
-import shortid from 'shortid';
 import Todo from '../../interfaces/Todo';
 
 const ADD_TODO = 'todos/ADD_TODO' as const;
@@ -27,22 +26,14 @@ export const deleteTodo = (payload: string) => {
   };
 };
 
-export const getTodoById = (payload: string) => {
-  return {
-    type: GET_TODO_BY_ID,
-    payload,
-  };
-};
-
 type ActionType =
   | ReturnType<typeof addTodo>
   | ReturnType<typeof switchTodo>
   | ReturnType<typeof deleteTodo>
-  | ReturnType<typeof getTodoById>;
 
 const initialTodo: Todo[] = [
   {
-    id: shortid.generate(),
+    id: 'wyUZwUFA_',
     title: '타입스크립트',
     content: 'Lv1 과제 완성하기',
     isDone: false,
@@ -67,9 +58,6 @@ const todos = (state: Todo[] = initialTodo, action: ActionType) => {
         (todo) => todo.id !== action.payload
       );
       return deletedOneTodos;
-    case GET_TODO_BY_ID:
-      const selectedTodo = state.find((todo) => todo.id === action.payload);
-      return selectedTodo;
     default:
       return state;
   }
