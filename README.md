@@ -1,7 +1,7 @@
 ##  프로젝트
 
 2023-07-31 ~ 2023-08-01 <br>
-기존 작성한 리액트 입문주차 과제 LV2 TodoList를 타입스크립트로 작성
+기존 작성한 타입스크립트 과제 LV2 TodoList를 redux-toolkit, axios, thunk로 리팩토링하기
 
 ##  기능
 
