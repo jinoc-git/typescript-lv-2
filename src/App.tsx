@@ -5,7 +5,7 @@ import { __getTodos } from './redux/modules/todosSlice';
 
 function App() {
   const dispatch = useAppDispatch();
-
+  
   useEffect(() => {
     dispatch(__getTodos());
   }, []);

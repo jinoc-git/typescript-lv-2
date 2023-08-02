@@ -1,14 +1,33 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosResponseHeaders } from 'axios';
 import Todo from '../../interfaces/Todo';
-import api from '../../axios/api';
+import api from // , { getTodos, addTodo, switchTodo, deleteTodo }
+'../../axios/api';
+
+// interface ErrorType {
+//   errMessage: string
+// }
+
+// interface AxiosError<T = any, D = any> extends Error {
+//   config: AxiosRequestConfig<D>;
+//   code?: string;
+//   request?: any;
+//   response?: AxiosResponse<T, D>;
+//   isAxiosError: boolean;
+//   toJSON: () => object;
+// }
+
+// interface ResponseDataType {
+//   message: string;
+//   code: number;
+// }
 
 export const __getTodos = createAsyncThunk(
   'getTodos',
-  async (payload, thunkAPI) => {
+  async (_, thunkAPI) => {
     try {
-      const res = await api.get('/todos');
-      return thunkAPI.fulfillWithValue(res.data);
+      const { data } = await api.get<Todo[]>('/todos');
+      return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       console.log(error);
       return thunkAPI.rejectWithValue(error);
@@ -21,8 +40,8 @@ export const __addTodo = createAsyncThunk(
   async (payload: Todo, thunkAPI) => {
     try {
       await api.post('/todos', payload);
-      const res = await api.get('/todos');
-      return thunkAPI.fulfillWithValue(res.data);
+      const { data } = await api.get<Todo[]>('/todos');
+      return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       console.log(error);
       return thunkAPI.rejectWithValue(error);
@@ -36,8 +55,8 @@ export const __switchTodo = createAsyncThunk(
     try {
       const switchedTodo: Todo = { ...payload, isDone: !payload.isDone };
       await api.patch(`/todos/${switchedTodo.id}`, switchedTodo);
-      const res = await api.get('/todos');
-      return thunkAPI.fulfillWithValue(res.data);
+      const { data } = await api.get<Todo[]>('/todos');
+      return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       console.log(error);
       return thunkAPI.rejectWithValue(error);
@@ -50,8 +69,8 @@ export const __deleteTodo = createAsyncThunk(
   async (payload: string, thunkAPI) => {
     try {
       await api.delete(`/todos/${payload}`);
-      const res = await api.get('/todos');
-      return thunkAPI.fulfillWithValue(res.data);
+      const { data } = await api.get<Todo[]>('/todos');
+      return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       console.log(error);
       return thunkAPI.rejectWithValue(error);
