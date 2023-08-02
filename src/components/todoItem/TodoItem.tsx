@@ -1,28 +1,39 @@
 import * as S from './style';
 import Todo from '../../interfaces/Todo';
 import Button from '../common/button/Button';
-import { useDispatch } from 'react-redux';
-import { deleteTodo, switchTodo } from '../../redux/modules/todos';
 import { useNavigate } from 'react-router-dom';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
+import { deleteTodo, switchTodo } from '../../api/todos';
 
 interface TodoItemProps {
   item: Todo;
 }
 
 const TodoItem = ({ item }: TodoItemProps) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const switchMutation = useMutation<void, AxiosError, Todo>(switchTodo, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['todos']);
+    },
+  });
+  const deleteMutation = useMutation<void, AxiosError, string>(deleteTodo, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['todos']);
+    },
+  });
 
   const onClickSwitchStatus = (
     e: React.MouseEvent<HTMLButtonElement>
   ): void => {
     e.stopPropagation();
-    dispatch(switchTodo(item.id));
+    switchMutation.mutate(item);
   };
 
   const onClickDeleteTodo = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.stopPropagation();
-    dispatch(deleteTodo(item.id));
+    deleteMutation.mutate(item.id);
   };
 
   const goToDetail = () => {

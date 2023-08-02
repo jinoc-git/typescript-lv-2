@@ -4,11 +4,17 @@ import Input from '../common/input/Input';
 import Button from '../common/button/Button';
 import shortid from 'shortid';
 import Todo from '../../interfaces/Todo';
-import { useDispatch } from 'react-redux';
-import { addTodo } from '../../redux/modules/todos';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { addTodo } from '../../api/todos';
+import { AxiosError } from 'axios';
 
 const Form = () => {
-  const dispatch = useDispatch();
+  const queryClient = useQueryClient();
+  const addMutation = useMutation<void, AxiosError, Todo>(addTodo, {
+    onSuccess: (): void => {
+      queryClient.invalidateQueries(['todos']);
+    },
+  });
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const disabled: boolean = title.length < 3 || content.length < 3;
@@ -26,7 +32,7 @@ const Form = () => {
       content,
       isDone: false,
     };
-    dispatch(addTodo(newTodo));
+    addMutation.mutate(newTodo)
     clearInput();
   };
 
