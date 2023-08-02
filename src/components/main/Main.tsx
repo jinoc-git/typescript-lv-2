@@ -1,19 +1,24 @@
 import * as S from './style';
 import Form from '../form/Form';
 import TodoList from '../todoList/TodoList';
-import { useAppSelector } from '../../redux/config/configStore';
+import { useQuery } from '@tanstack/react-query';
+import { getTodos } from '../../api/todos';
+import { AxiosError } from 'axios';
+import Todo from '../../interfaces/Todo';
+import Loading from '../loading/Loading';
 
 const Main = () => {
-  const { todos, isLoading, isError } = useAppSelector((state) => state.todos);
+  const {
+    data: todos,
+    isLoading,
+    isError,
+  } = useQuery<Todo[], AxiosError>(['todos'], getTodos);
 
-  if (isLoading || !todos || isError) {
+  if (isLoading || isError) {
     return (
-      <S.MainLayout>
+      <Loading>
         <Form />
-        <S.LoadingBox>
-          <S.Loading />
-        </S.LoadingBox>
-      </S.MainLayout>
+      </Loading>
     );
   }
 

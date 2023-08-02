@@ -1,14 +1,24 @@
-import React from 'react';
 import * as S from './style';
 import TodoItem from '../todoItem/TodoItem';
-import { useAppSelector } from '../../redux/config/configStore';
+import { useQuery } from '@tanstack/react-query';
+import { getTodos } from '../../api/todos';
+import Todo from '../../interfaces/Todo';
+import { AxiosError } from 'axios';
 
 interface TodoListProps {
   isDone: boolean;
 }
 
 const TodoList = ({ isDone }: TodoListProps) => {
-  const { todos } = useAppSelector((state) => state.todos);
+  const {
+    data: todos,
+    isError,
+    isLoading,
+  } = useQuery<Todo[], AxiosError>(['todos'], getTodos);
+
+  if (isLoading || isError || !todos) {
+    return <></>;
+  }
 
   return (
     <S.TodoListLayout>
