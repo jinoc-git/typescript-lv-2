@@ -5,4 +5,4 @@ interface Todo {
   isDone: boolean;
 }
 
-export default Todo
+export default Todo;
