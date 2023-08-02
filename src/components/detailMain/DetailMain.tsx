@@ -10,16 +10,21 @@ import Loading from '../loading/Loading';
 const DetailMain = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+
   const {
     data: todo,
     isLoading,
     isError,
-  } = useQuery<Todo[], AxiosError, Todo | undefined>(['todos'], getTodos, {
-    select: (todos) => {
-      const todo = todos.find((todo) => todo.id === id);
-      return todo;
-    },
-  });
+  } = useQuery<Todo[], AxiosError, Todo | undefined, string[]>(
+    ['todos', id as string],
+    getTodos,
+    {
+      select: (todos) => {
+        const todo = todos.find((todo) => todo.id === id);
+        return todo;
+      },
+    }
+  );
 
   const goToHome = () => {
     navigate('/');
