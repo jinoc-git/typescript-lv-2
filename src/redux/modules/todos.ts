@@ -3,7 +3,6 @@ import Todo from '../../interfaces/Todo';
 const ADD_TODO = 'todos/ADD_TODO' as const;
 const SWITCH_TODO = 'todos/SWITCH_TODO' as const;
 const DELETE_TODO = 'todos/DELETE_TODO' as const;
-const GET_TODO_BY_ID = 'todos/GET_TODO_BY_ID' as const;
 
 export const addTodo = (payload: Todo) => {
   return {
