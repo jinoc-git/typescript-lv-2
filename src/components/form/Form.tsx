@@ -4,11 +4,11 @@ import Input from '../common/input/Input';
 import Button from '../common/button/Button';
 import shortid from 'shortid';
 import Todo from '../../interfaces/Todo';
-import { useDispatch } from 'react-redux';
-import { addTodo } from '../../redux/modules/todos';
+import { useAppDispatch } from '../../redux/config/configStore';
+import { __addTodo } from '../../redux/modules/todosSlice';
 
 const Form = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const disabled: boolean = title.length < 3 || content.length < 3;
@@ -26,7 +26,7 @@ const Form = () => {
       content,
       isDone: false,
     };
-    dispatch(addTodo(newTodo));
+    dispatch(__addTodo(newTodo));
     clearInput();
   };
 
